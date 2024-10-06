@@ -11,23 +11,23 @@
         <h1>Kalkulator Rat Kredytowych</h1>
 
         <form action="calc2.jsp" method="POST">
-            <label for="kwota-pozyczki">Kwota pożyczki:</label>
-            <input type="number" name="kwota" step="0.01" required />
+            <label for="kwota-pozyczki">Kwota pożyczki</label>
+            <input type="number" name="kwota-pozyczki" id="kwota-pozyczki"  />
             <br />
-            <label for="procent-roczny">Procent roczny:</label>
-            <input type="number" name="procentRoczny" step="0.01" required />
+            <label for="procent-roczny">Procent roczny</label>
+            <input type="number" name="procent-roczny" id="procent-roczny"  />
             <br />
-            <label for="liczba-rat">Liczba rat:</label>
-            <input type="number" name="liczbaRat" required />
+            <label for="liczba-rat">Liczba rat</label>
+            <input type="number" name="liczba-rat" id="liczba-rat" />
             <br />
-            <input type="submit" value="Oblicz" />
+            <input type="submit" name="Oblicz" value="Oblicz" id="Oblicz"/>
         </form>
 
         <%
-            if (request.getParameter("kwota") != null) {
-                double kwota = Double.parseDouble(request.getParameter("kwota"));
-                double procentRoczny = Double.parseDouble(request.getParameter("procentRoczny"));
-                int liczbaRat = Integer.parseInt(request.getParameter("liczbaRat"));
+            if (request.getParameter("Oblicz") != null) {
+                double kwota = Double.parseDouble(request.getParameter("kwota-pozyczki"));
+                double procentRoczny = Double.parseDouble(request.getParameter("procent-roczny"));
+                int liczbaRat = Integer.parseInt(request.getParameter("liczba-rat"));
 
                 // Ustawianie wartości w obiekcie loan
                 loan.setKwota(kwota);

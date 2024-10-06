@@ -26,17 +26,16 @@
         
         <form action="calc.jsp" method="POST">
             <label for="kwota-pozyczki">Kwota pożyczki</label>
-            <input type="number" name="kwota-pozyczki" id="kwota-pozyczki" step="0.01" required/>
+            <input type="number" name="kwota-pozyczki" id="kwota-pozyczki"  />
             <br />
             <label for="procent-roczny">Procent roczny</label>
-            <input type="number" name="procent-roczny" id="procent-roczny" step="0.01" required/>
+            <input type="number" name="procent-roczny" id="procent-roczny"  />
             <br />
             <label for="liczba-rat">Liczba rat</label>
-            <input type="number" name="liczba-rat" id="liczba-rat" required/>
+            <input type="number" name="liczba-rat" id="liczba-rat" />
             <br />
             <input type="submit" name="Oblicz" value="Oblicz" id="Oblicz"/>
         </form>
-        <p id="wynik"></p>
 
         <% 
             if (request.getParameter("Oblicz") != null) {
