@@ -23,6 +23,7 @@
                 out.println("<td>" + country.getCode() + "</td>");
                 out.println("<td>" + country.getName() + "</td>");
                 out.println("<td>" + country.getPopulation() + "</td>");
+                out.println("<td><a href='details.jsp?index=" + countries.indexOf(country) + "'>View Details</a></td>");
                 out.println("</tr>");
             }
             out.println("</table>");

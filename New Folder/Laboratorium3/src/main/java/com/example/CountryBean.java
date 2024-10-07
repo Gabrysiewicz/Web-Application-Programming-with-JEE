@@ -7,7 +7,9 @@ public class CountryBean implements Serializable {
     private String code;        // Country code
     private String name;        // Country name
     private long population;     // Country population
-
+    private long surfaceArea;
+    private long GNP;
+    private long lifeExpectancy;
     // Default constructor
     public CountryBean() {
     }
@@ -37,5 +39,32 @@ public class CountryBean implements Serializable {
 
     public void setPopulation(long population) {
         this.population = population;
+    }
+    
+    // Getter and Setter for population
+    public long getSurfaceArea() {
+        return surfaceArea;
+    }
+
+    public void setSurfaceArea(long surfaceArea) {
+        this.surfaceArea = surfaceArea;
+    }
+    
+    // Getter and Setter for population
+    public long getGNP() {
+        return GNP;
+    }
+
+    public void setGNP(long GNP) {
+        this.GNP = GNP;
+    }
+    
+    // Getter and Setter for population
+    public long getLifeExpectancy() {
+        return lifeExpectancy;
+    }
+
+    public void setLifeExpectancy(long lifeExpectancy) {
+        this.lifeExpectancy = lifeExpectancy;
     }
 }

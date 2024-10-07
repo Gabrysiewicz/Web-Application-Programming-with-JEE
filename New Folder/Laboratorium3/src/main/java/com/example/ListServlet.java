@@ -54,7 +54,7 @@ public class ListServlet extends HttpServlet {
 
             // Create a list to hold CountryBean objects
             ArrayList<CountryBean> countryList = new ArrayList<>();
-            String query = "SELECT code, name, population FROM country WHERE Continent = 'Europe'";
+            String query = "SELECT code, name, population, SurfaceArea, GNP, LifeExpectancy FROM country WHERE Continent = 'Europe'";
 
             // Execute the query and process the result set
             Statement st = conn.createStatement();
@@ -65,6 +65,10 @@ public class ListServlet extends HttpServlet {
                 country.setCode(rs.getString("code"));
                 country.setName(rs.getString("name"));
                 country.setPopulation(rs.getLong("population"));
+                country.setSurfaceArea(rs.getLong("SurfaceArea"));
+                country.setGNP(rs.getLong("GNP"));
+                country.setLifeExpectancy(rs.getLong("LifeExpectancy"));
+
                 countryList.add(country);
             }
 
