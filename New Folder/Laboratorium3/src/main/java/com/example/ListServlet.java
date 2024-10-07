@@ -11,15 +11,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author kamil
@@ -39,63 +40,55 @@ public class ListServlet extends HttpServlet {
      * @throws java.lang.ClassNotFoundException
      */
 
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException, SQLException, ClassNotFoundException {
-    response.setContentType("text/html;charset=UTF-8");
-    
-    try (PrintWriter out = response.getWriter()) {
-        // Load MySQL driver
-        Class.forName("com.mysql.cj.jdbc.Driver"); 
-        
+ protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+
         Connection conn = null;
-        
         try {
+            // Load MySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
             // Attempt to connect to MySQL
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/world?serverTimezone=UTC", "root", "qwe123");
-            
-            // If connection is successful, process the query or return success message
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Connected successfully to MySQL database</h1>");
+
+            // Create a list to hold CountryBean objects
+            ArrayList<CountryBean> countryList = new ArrayList<>();
+            String query = "SELECT code, name, population FROM country WHERE Continent = 'Europe'";
+
+            // Execute the query and process the result set
             Statement st = conn.createStatement();
-            String query="SELECT * FROM country WHERE Continent = 'Europe'";
-            //wykonanie zapytania SQL:
             ResultSet rs = st.executeQuery(query);
-            out.println("<table>");
+
             while (rs.next()) {
-                //pobierz i wyświetl dane z odpowiedniej kolumny
-                out.println("<tr><td>");
-                    out.print(rs.getString("name"));
-                out.println("</td></tr>");    
-                //out.println …
+                CountryBean country = new CountryBean();
+                country.setCode(rs.getString("code"));
+                country.setName(rs.getString("name"));
+                country.setPopulation(rs.getLong("population"));
+                countryList.add(country);
             }
-            out.println("</table>");
-            
 
-            out.println("</body>");
-            out.println("</html>");
-            
-            // Perform your SQL operations here
-            // For example: Statement stmt = conn.createStatement();
-            // ResultSet rs = stmt.executeQuery("SELECT * FROM Country WHERE Continent = 'Europe'");
-            // Loop through result set and print results
+            // Store the list of countries in the session
+            HttpSession session = request.getSession();
+            session.setAttribute("list", countryList);
 
-        } catch (SQLException e) {
-            // Handle database connection failure
-            out.println("<h2>Error: Unable to connect to the database</h2>");
-            out.println("<p>Exception message: " + e.getMessage() + "</p>");
+            // Redirect to the JSP page
+            response.sendRedirect("countryList.jsp");
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServletException("Error retrieving country data", e);
         } finally {
             // Close the connection if it was opened
             if (conn != null && !conn.isClosed()) {
-                conn.close();
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
-}
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -111,7 +104,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ListServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -129,7 +122,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ListServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
