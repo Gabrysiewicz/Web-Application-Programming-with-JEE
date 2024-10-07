@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-for-jee
+    environment:
+      MYSQL_ROOT_PASSWORD: qwe123     # Set the MySQL root password
+      MYSQL_DATABASE: world           # Create a default database
+      MYSQL_USER: myuser              # Create a new user
+      MYSQL_PASSWORD: mypassword      # Set the password for the new user
+    ports:
+      - "3306:3306"  # Expose MySQL port
+#    volumes:
+#      - "./database:/var/lib/mysql"  # Mount host directory to container
+    networks:
+      - mysql-network  # Optionally use a custom network
+
+networks:
+  mysql-network:
+    driver: bridge
