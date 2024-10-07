@@ -72,4 +72,5 @@ public class Zadanie{
     public void setWykonane(Boolean wykonane) {
         this.wykonane = wykonane;
     }
+    
 }
