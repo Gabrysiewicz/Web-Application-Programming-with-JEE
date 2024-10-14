@@ -1,10 +1,10 @@
-package laboratorium6.laby;
+package bp.pai_security;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LabyApplicationTests {
+class PaiSecurityApplicationTests {
 
 	@Test
 	void contextLoads() {
