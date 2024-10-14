@@ -15,6 +15,7 @@
 
         if (countries == null || countries.isEmpty()) {
             out.println("<p>No countries found for the specified continent.</p>");
+            out.println(countries);
         } else {
             out.println("<table border='1'>");
             out.println("<tr><th>Country Code</th><th>Country Name</th><th>Population</th></tr>");

@@ -13,5 +13,7 @@
         <p><strong>Wiadomość błędu:</strong> <%= exception.getMessage() %></p>
 
         <p>Spróbuj ponownie lub skontaktuj się z administratorem.</p>
+        
+        <a href="calc2.jsp"> Powrót </a>
     </body>
 </html>
