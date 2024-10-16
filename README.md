@@ -1,37 +1,18 @@
 <h1 align='center'> Programowanie aplikacji internetowych w JEE </h1>
 
-<table>
-  <tr>
-    <th> Laboratorium </th>    <th> Oddane </th>    <th> Punkty </th>
-  </tr>
-  <tr>
-    <td> Laboratorium 1 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 2 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 3 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 4 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 5 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 6 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 7 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 8 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 9 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-  <tr>
-    <td> Laboratorium 10 </td>  <td> [ ] </td>       <td> 0/0 </td>
-  </tr>
-</table>
+<div align="center">
+  
+| Laboratorium | Oddane | Punkty | Opis |
+| --- | --- | --- | --- |
+| Laboratorium 1 | ✔️ | 0/0 | ŚRODOWISKO JEE I INTERFEJS SERWLETÓW |
+| Laboratorium 2 | ❓ | 0/0 | JSP I JAVA BEAN |
+| Laboratorium 3 | ❓ | 0/0 | SERWLETY, JAVA BEAN, JSP I MYSQL |
+| Laboratorium 4 | ❓ | 0/0 | WPROWADZENIE DO SPRING MVC |
+| Laboratorium 5 | ❓ | 0/0 | SPRING BOOT I JPA |
+| Laboratorium 6 | ❓ | 0/0 | SPRING SECURITY I THYMELEAF |
+| Laboratorium 7 | ❓ | 0/0 | SPRING BOOT I REST API |
+| Laboratorium 8 | ❓ | 0/0 | SPRING BOOT I DTO |
+| Laboratorium 9 | ❓ | 0/0 | SPRING I JSON WEB TOKEN |
+| Laboratorium 10 | ❓ | 0/0 | SPRING, JWT I MYSQL |
+
+</div>
