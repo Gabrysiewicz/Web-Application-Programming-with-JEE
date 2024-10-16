@@ -22,9 +22,9 @@
             int index = Integer.parseInt(indexParam);
 
             // Retrieve the list from the session
-            List<CountryBean> countries = (List<CountryBean>) request.getSession().getAttribute("list");
-
-            if (countries == null || index < 0 || index >= countries.size()) {
+//            List<CountryBean> countries = (List<CountryBean>) request.getSession().getAttribute("list");
+            List<CountryBean> countries = (List<CountryBean>)request.getSession().getAttribute("list");
+            if (countries == null || index < 0 || index >= countries.size() ) {
                 out.println("<p>Invalid country selection.</p>");
             } else {
                 // Get the selected country

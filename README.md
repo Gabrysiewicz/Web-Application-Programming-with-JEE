@@ -4,9 +4,9 @@
   
 | Laboratorium | Oddane | Punkty | Opis |
 | --- | --- | --- | --- |
-| Laboratorium 1 | ✔️ | 0/0 | ŚRODOWISKO JEE I INTERFEJS SERWLETÓW |
-| Laboratorium 2 | ❓ | 0/0 | JSP I JAVA BEAN |
-| Laboratorium 3 | ❓ | 0/0 | SERWLETY, JAVA BEAN, JSP I MYSQL |
+| Laboratorium 1 | ✔️  | ?/? | ŚRODOWISKO JEE I INTERFEJS SERWLETÓW |
+| Laboratorium 2 | ✔️  | ?/? | JSP I JAVA BEAN |
+| Laboratorium 3 | ✔️  | 5/5 | SERWLETY, JAVA BEAN, JSP I MYSQL |
 | Laboratorium 4 | ❓ | 0/0 | WPROWADZENIE DO SPRING MVC |
 | Laboratorium 5 | ❓ | 0/0 | SPRING BOOT I JPA |
 | Laboratorium 6 | ❓ | 0/0 | SPRING SECURITY I THYMELEAF |

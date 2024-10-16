@@ -1,11 +1,12 @@
 package mypackage.beans;
+
 public class Pracownik {
     private int id;
     private String nazwisko;
     private float pensja;
     private String firma;
-    
-    // Getter and Setter for id
+
+    // Getters and setters for each field
     public int getId() {
         return id;
     }
@@ -14,7 +15,6 @@ public class Pracownik {
         this.id = id;
     }
 
-    // Getter and Setter for nazwisko
     public String getNazwisko() {
         return nazwisko;
     }
@@ -23,7 +23,6 @@ public class Pracownik {
         this.nazwisko = nazwisko;
     }
 
-    // Getter and Setter for pensja
     public float getPensja() {
         return pensja;
     }
@@ -32,7 +31,6 @@ public class Pracownik {
         this.pensja = pensja;
     }
 
-    // Getter and Setter for firma
     public String getFirma() {
         return firma;
     }

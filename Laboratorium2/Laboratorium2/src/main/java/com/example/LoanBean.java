@@ -48,7 +48,7 @@ public class LoanBean implements Serializable {
 
     // Calculate monthly interest rate
     double p = (procentRoczny / 100) / 12;
-    if (p == 0) {
+    if (p <= 0) {
         throw new IllegalArgumentException("Miesięczny przyrost jest wartością mniejąszą\równą zeru.");
     }
 
