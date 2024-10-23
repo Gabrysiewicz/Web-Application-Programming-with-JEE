@@ -21,7 +21,7 @@
             <td> ${pr.pensja} </td>
             <td> ${pr.firma} </td>
             <td><a href="edit/${pr.id}"> Edytuj </a></td>
-            <td><a href="…"> Usuń </a></td>
+            <td><a href="delete/${pr.id}"> Usuń </a></td>
             </tr>
             </c:forEach>
         </table>

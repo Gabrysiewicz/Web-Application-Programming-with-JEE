@@ -17,6 +17,9 @@ public class PracownikDao {
 
     public int save(Pracownik p) {
         String sql = "insert into pracownik (nazwisko, pensja, firma) values('" + p.getNazwisko() + "'," + p.getPensja() + ",'" + p.getFirma() + "')";
+        if (p.getNazwisko().matches(".*\\d.*")) {
+            throw new IllegalArgumentException("Name cannot contain numbers: " + p.getNazwisko());
+        }
         return template.update(sql);
     }
 
@@ -40,22 +43,36 @@ public class PracownikDao {
 
     public int update(Pracownik p) {
         String sql = "UPDATE pracownik SET nazwisko = ?, pensja = ?, firma = ? WHERE id = ?";
+        if (p.getNazwisko().matches(".*\\d.*")) {
+            throw new IllegalArgumentException("Name cannot contain numbers: " + p.getNazwisko());
+        }   
         return template.update(sql, p.getNazwisko(), p.getPensja(), p.getFirma(), p.getId());
     }
 
     public Pracownik getPracownikById(int id) {
-        List<Pracownik> prlist = template.query("select * from pracownik where id = ?", new RowMapper<Pracownik>() {
-            @Override
-            public Pracownik mapRow(ResultSet rs, int row) throws SQLException {
-                Pracownik e = new Pracownik();
-                e.setId(rs.getInt(1));
-                e.setNazwisko(rs.getString(2));
-                e.setPensja(rs.getFloat(3));
-                e.setFirma(rs.getString(4));
-                return e;
+        List<Pracownik> prlist = template.query(
+            "SELECT * FROM pracownik WHERE id = ?", 
+            new Object[] {id},
+            new RowMapper<Pracownik>() {
+                @Override
+                public Pracownik mapRow(ResultSet rs, int row) throws SQLException {
+                    Pracownik e = new Pracownik();
+                    e.setId(rs.getInt("id")); 
+                    e.setNazwisko(rs.getString("nazwisko"));
+                    e.setPensja(rs.getFloat("pensja"));
+                    e.setFirma(rs.getString("firma"));
+                    return e;
+                }
             }
-        });
+        );
+
+        // Check if the list is empty before returning the first element
+        if (prlist.isEmpty()) {
+            return null; 
+        }
+
         return prlist.get(0);
     }
+
 
 }

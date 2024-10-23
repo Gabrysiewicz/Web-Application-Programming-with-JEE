@@ -1,5 +1,6 @@
 package mypackage.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import mypackage.beans.Pracownik;
 import mypackage.dao.PracownikDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import javax.naming.InvalidNameException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PracownikController {
@@ -21,14 +26,14 @@ public class PracownikController {
     @RequestMapping("/addForm")
     public String showform(Model m) {
         m.addAttribute("command", new Pracownik());
-        return "addForm"; // redirect to addForm.jsp
+        return "addForm"; 
     }
 
     // Save new employee
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("command") Pracownik pr) {
         dao.save(pr);
-        return "redirect:/viewAll"; // redirect to /viewAll endpoint
+        return "redirect:/viewAll"; 
     }
 
     // Get list of employees and add them to the model
@@ -36,14 +41,14 @@ public class PracownikController {
     public String viewAll(Model m) {
         List<Pracownik> list = dao.getAll();
         m.addAttribute("list", list);
-        return "viewAll"; // redirect to viewAll.jsp
+        return "viewAll";
     }
 
     // Delete employee by ID
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable int id) {
         dao.delete(id);
-        return "redirect:/viewAll"; // redirect back to the list of employees
+        return "redirect:/viewAll";
     }
 
     // Show form for editing an employee
@@ -51,13 +56,21 @@ public class PracownikController {
     public String edit(@PathVariable int id, Model m) {
         Pracownik pr = dao.getPracownikById(id);
         m.addAttribute("command", pr);
-        return "editForm"; // redirect to editForm.jsp
+        return "editForm";
     }
 
     // Save updated employee
     @RequestMapping(value = "/saveedit", method = RequestMethod.POST)
     public String editsave(@ModelAttribute("command") Pracownik pr) {
         dao.update(pr);
-        return "redirect:/viewAll"; // redirect to /viewAll after saving the edit
+        return "redirect:/viewAll";
+    }
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", ex);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("errorPage");
+        return mav;
     }
 }

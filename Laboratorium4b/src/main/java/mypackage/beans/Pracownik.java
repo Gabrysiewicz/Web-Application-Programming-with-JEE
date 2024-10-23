@@ -1,6 +1,7 @@
 package mypackage.beans;
 
 public class Pracownik {
+    
     private int id;
     private String nazwisko;
     private float pensja;
