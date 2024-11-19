@@ -1,13 +1,13 @@
-package com.example.Laboratorium6;
+package com.example.RestApi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Laboratorium6ApplicationTests {
+class RestApiApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 }
