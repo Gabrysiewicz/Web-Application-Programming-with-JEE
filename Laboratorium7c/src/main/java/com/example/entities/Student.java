@@ -29,5 +29,29 @@ public class Student {
 
     @JsonView
     private double average;
+    
+    // Dodajemy ręcznie metody getter i setter, jeśli Lombok nie działa
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public double getAverage() {
+        return average;
+    }
+
+    public void setAverage(double average) {
+        this.average = average;
+    }
 }
