@@ -32,4 +32,7 @@ public class UserService {
     public void saveUser(User user) {
         userDao.save(user);
     }
+    public void deleteUser(User user) {
+        userDao.delete(user);
+    }
 }

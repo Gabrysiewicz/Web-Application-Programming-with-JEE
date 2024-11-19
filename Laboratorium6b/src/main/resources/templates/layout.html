@@ -34,11 +34,22 @@
                 <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/users}">Wyświetl użytkowników</a>
                 </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/edit}">Edytuj Konto</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/delete}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <button type="submit">Delete Account</button>
+                    </form>
+                </li>
                 <li sec:authorize="!isAuthenticated()">
                     <a th:href="@{/login}">Zaloguj się</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/logout}">Wyloguj się</a>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
                 </li>
             </ul>
         </div>

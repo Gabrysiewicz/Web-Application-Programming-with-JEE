@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -33,23 +34,29 @@ public class Security {
     }
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.httpBasic().disable()
-        .csrf().disable()
-        .authorizeHttpRequests()
-        .requestMatchers("/register").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .formLogin()
-        .loginPage("/login")
-        .usernameParameter("login")
-        .passwordParameter("passwd")
-        .defaultSuccessUrl("/profile", true)
-        .permitAll()
-        .and()
-        .logout()
-        .logoutUrl("/logout")
-        .logoutSuccessUrl("/login")
-        .invalidateHttpSession(true);
+        http
+            .httpBasic().disable()
+            .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
+            .authorizeHttpRequests()
+                .requestMatchers("/register", "/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .usernameParameter("login")
+                .passwordParameter("passwd")
+                .defaultSuccessUrl("/profile", true)
+                .permitAll()
+                .and()
+            .logout()
+                .logoutUrl("/logout") // The custom logout URL
+                .logoutSuccessUrl("/login") // Redirect to login page after logout
+                .invalidateHttpSession(true) // Invalidate the session
+                .clearAuthentication(true) // Clear authentication information
+                .deleteCookies("JSESSIONID") // Optionally delete session cookies
+                .permitAll();
         return http.build();
     }
 }
