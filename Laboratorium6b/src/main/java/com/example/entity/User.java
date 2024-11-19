@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 
@@ -14,19 +17,31 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id") // Maps to the column in the database
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "name") // Maps to the column in the database
+
+    @NotNull(message = "Name is required.")
+    @Size(min = 2, max = 255, message = "Name must be between 2 and 255 characters.")
+    @Column(name = "name")
     private String name;
-    @Column(name = "surname") // Maps to the column in the database
+
+    @NotNull(message = "Surname is required.")
+    @Size(min = 2, max = 255, message = "Surname must be between 2 and 255 characters.")
+    @Column(name = "surname")
     private String surname;
-    @Column(name = "login") // Maps to the column in the database
+
+    @NotNull(message = "Login is required.")
+    @Size(min = 4, max = 255, message = "Login must be between 5 and 255 characters.")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Login can only contain alphanumeric characters.")
+    @Column(name = "login", unique = true)  // Enforce uniqueness at the database level
     private String login;
-    @Column(name = "password") // Maps to the column in the database
+
+    @NotNull(message = "Password is required.")
+    @Size(min = 6, message = "Password must be at least 6 characters.")
+    @Column(name = "password")
     private String password;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String name, String surname, String login, String password) {
         this.name = name;
@@ -35,6 +50,7 @@ public class User {
         this.password = password;
     }
 
+    // Getters and setters
     public Integer getId() {
         return id;
     }

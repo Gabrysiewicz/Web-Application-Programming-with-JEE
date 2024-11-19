@@ -4,6 +4,7 @@ import com.example.entity.User;
 import com.example.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -31,17 +34,23 @@ public class UserController {
     }
     @GetMapping("/register")
     public String registerPage(Model m) {
-        //dodanie do modelu nowego użytkownika
+        // Add a new empty User object to the model
         m.addAttribute("user", new User());
-        //zwrócenie nazwy widoku rejestracji - register.html
         return "register";
     }
+
     @PostMapping("/register")
-    public String registerPagePOST(@ModelAttribute User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        dao.save(user);
-        //przekierowanie do adresu url: /login
-        return "redirect:/login";
+    public String registerPagePOST(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+        if (dao.findByLogin(user.getLogin()) != null) {
+            // If login already exists, add an error message
+            bindingResult.rejectValue("login", "error.login", "Login is already taken.");
+        }
+        if (bindingResult.hasErrors()) {
+            return "register"; // Return to the register form if validation errors are found
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Hash password
+        dao.save(user); // Save the user to the database
+        return "redirect:/login"; // Redirect to login page after successful registration
     }
     @GetMapping("/profile")
     public String profilePage(Model m, Principal principal) {
@@ -69,25 +78,42 @@ public class UserController {
         // Return the view for editing user information (edit.html)
         return "edit";
     }
-
     @PostMapping("/edit")
-    public String editUser(@ModelAttribute User user, Principal principal) {
-        // Ensure the update applies to the logged-in user
-        User currentUser = userService.getUserByLogin(principal.getName());
-        currentUser.setName(user.getName());
-        currentUser.setSurname(user.getSurname());
-        currentUser.setLogin(user.getLogin());
-
-        // Hash and update the password only if it has been changed
-        if (!user.getPassword().isEmpty()) {
-            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult, @RequestParam("id") Integer id) {
+        // Check if login is taken by another user excluding the current user
+        User existingUser = dao.findByLoginAndIdNot(user.getLogin(), id);
+        if (existingUser != null) {
+            bindingResult.rejectValue("login", "error.login", "Login is already taken.");
         }
 
-        userService.saveUser(currentUser);
+        if (bindingResult.hasErrors()) {
+            return "edit";  // Return to the edit page if there are errors
+        }
 
-        // Redirect to the profile page after editing
-        return "redirect:/profile";
+        // Hash password and save
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        dao.save(user);
+
+        return "profile";  // Redirect to the profile page after successful update
     }
+//    @PostMapping("/edit")
+//    public String editUser(@ModelAttribute User user, Principal principal) {
+//        // Ensure the update applies to the logged-in user
+//        User currentUser = userService.getUserByLogin(principal.getName());
+//        currentUser.setName(user.getName());
+//        currentUser.setSurname(user.getSurname());
+//        currentUser.setLogin(user.getLogin());
+//
+//        // Hash and update the password only if it has been changed
+//        if (!user.getPassword().isEmpty()) {
+//            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+//        }
+//
+//        userService.saveUser(currentUser);
+//
+//        // Redirect to the profile page after editing
+//        return "redirect:/profile";
+//    }
 
     @PostMapping("/delete")
     public String deleteUser(Principal principal) {

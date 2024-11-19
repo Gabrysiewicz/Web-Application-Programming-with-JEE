@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Edit Profile</title>
-</head>
-<body>
-    <form th:action="@{/edit}" th:object="${user}" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" th:value="${user.name}" required><br>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head"> </head>
+    <body>
+        <div th:include="layout :: navigationPanel"></div>
+        <h1>Edytuj Konto:</h1>
+        <form th:action="@{/edit}" method="POST" th:object="${user}">
+            <input type="hidden" th:field="*{id}"/>  <!-- Hidden field for the user ID -->
+            <input type="text" th:field="*{name}" placeholder="Imię"/>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+            <br/>
+            <input type="text" th:field="*{surname}" placeholder="Nazwisko"/>
+            <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+            <br/>
+            <input type="text" th:field="*{login}" placeholder="Login"/>
+            <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</div>
+            <br/>
+            <input type="password" th:field="*{password}" placeholder="Hasło"/>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+            <br/>
+            <button type="submit">Zapisz zmiany</button>
+        </form>
 
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" name="surname" th:value="${user.surname}" required><br>
 
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login" th:value="${user.login}" required><br>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Leave empty to keep current password"><br>
-
-        <button type="submit">Save Changes</button>
-    </form>
-</body>
+        <div th:include="layout :: footer"></div>
+    </body>
 </html>
