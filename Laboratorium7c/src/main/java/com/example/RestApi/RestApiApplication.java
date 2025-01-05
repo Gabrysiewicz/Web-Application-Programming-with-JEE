@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.example")
-@EnableJpaRepositories("com.example.entities")  // Explicitly specify the package for repositories
-@EntityScan("com.example.entities")  // Ensure this points to where your entity classes are defined
+@EnableJpaRepositories("com.example.entities") 
+@EntityScan("com.example.entities")
 public class RestApiApplication {
 
 	public static void main(String[] args) {

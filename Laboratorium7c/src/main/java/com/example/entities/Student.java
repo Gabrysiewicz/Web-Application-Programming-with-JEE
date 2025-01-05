@@ -19,6 +19,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView
     private Long id;
 
     @JsonView
@@ -30,7 +31,11 @@ public class Student {
     @JsonView
     private double average;
     
-    // Dodajemy ręcznie metody getter i setter, jeśli Lombok nie działa
+    
+    public Long getId() {
+        return id;
+    }
+    
     public String getName() {
         return name;
     }

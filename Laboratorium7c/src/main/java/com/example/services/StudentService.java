@@ -16,13 +16,13 @@ public class StudentService {
         return (List<Student>) studentRepository.findAll();
     }
     public Student addStudent(Student student) {
-        return studentRepository.save(student);  // Zapisuje obiekt do bazy danych
+        return studentRepository.save(student); 
     }
     // Metoda do usuwania studenta
     public boolean deleteStudent(Long id) {
         Optional<Student> student = studentRepository.findById(id);
         if (student.isPresent()) {
-            studentRepository.deleteById(id);  // Usuwamy studenta, jeśli istnieje
+            studentRepository.deleteById(id);
             return true;
         } else {
             return false;  // Nie znaleziono studenta o podanym ID
@@ -34,14 +34,13 @@ public class StudentService {
         if (existingStudent.isPresent()) {
             Student updatedStudent = existingStudent.get();
 
-            // Zaktualizuj tylko pola, które mogą się zmienić
             updatedStudent.setName(student.getName());
             updatedStudent.setSurname(student.getSurname());
             updatedStudent.setAverage(student.getAverage());
 
-            return studentRepository.save(updatedStudent);  // Zapisujemy zaktualizowanego studenta
+            return studentRepository.save(updatedStudent); 
         } else {
-            return null;  // Jeśli student o podanym ID nie istnieje
+            return null;
         }
     }
 }

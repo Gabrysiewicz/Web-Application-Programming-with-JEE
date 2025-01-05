@@ -3,64 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student API</title>
+    <title>Student Management</title>
+    
 </head>
 <body>
+    <div>
+        <h1>Student Management System</h1>
 
-    <h1>Student API</h1>
+        <!-- Fetch Students -->
+        <div>
+            <button id="getStudentsBtn">Pobierz studentów</button>
+            <ul id="studentList"></ul>
+        </div>
 
-    <!-- Formularz dodawania studenta -->
-    <h2>Dodaj studenta</h2>
-    <form id="addStudentForm">
-        <label for="name">Imię:</label>
-        <input type="text" id="name" name="name" required><br><br>
+        <!-- Add Student Form -->
+        <div>
+            <h2>Dodaj studenta</h2>
+            <form id="addStudentForm">
+                <input type="text" name="name" placeholder="Imię" required>
+                <input type="text" name="surname" placeholder="Nazwisko" required>
+                <input type="number" name="average" placeholder="Średnia" required step="0.1">
+                <button type="submit">Dodaj</button>
+            </form>
+        </div>
 
-        <label for="surname">Nazwisko:</label>
-        <input type="text" id="surname" name="surname" required><br><br>
+        <!-- Update Student Form -->
+        <div>
+            <h2>Edytuj studenta</h2>
+            <form id="updateStudentForm">
+                <input type="number" name="studentId" placeholder="ID studenta" required>
+                <input type="text" name="updateName" placeholder="Nowe imię" required>
+                <input type="text" name="updateSurname" placeholder="Nowe nazwisko" required>
+                <input type="number" name="updateAverage" placeholder="Nowa średnia" required step="0.1">
+                <button type="submit">Zaktualizuj</button>
+            </form>
+        </div>
 
-        <label for="average">Średnia:</label>
-        <input type="number" id="average" name="average" required><br><br>
+        <!-- Delete Student Form -->
+        <div>
+            <h2>Usuń studenta</h2>
+            <form id="deleteStudentForm">
+                <input type="number" name="deleteStudentId" placeholder="ID studenta" required>
+                <button type="submit">Usuń</button>
+            </form>
+        </div>
+    </div>
 
-        <button type="submit">Dodaj studenta</button>
-    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
 
-    <br><br>
+            // Pobieranie listy studentów
+            const getStudentsBtn = document.getElementById("getStudentsBtn");
+            const studentList = document.getElementById("studentList");
 
-    <!-- Lista studentów -->
-    <h2>Lista studentów</h2>
-    <button id="getStudentsBtn">Pobierz studentów</button>
-    <ul id="studentList"></ul>
+            getStudentsBtn.addEventListener("click", async () => {
+                try {
+                    const response = await fetch("/students");
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    console.log(data); 
 
-    <br><br>
+                    // Extract the students array from the response
+                    const students = data._embedded ? data._embedded.students : [];
 
-    <!-- Edytowanie studenta -->
-    <h2>Edytuj studenta</h2>
-    <form id="updateStudentForm">
-        <label for="studentId">ID studenta:</label>
-        <input type="number" id="studentId" name="studentId" required><br><br>
+                    if (Array.isArray(students)) {
+                        studentList.innerHTML = "";  // Clear the list
+                        students.forEach(student => {
+                            const studentId = student._links.self.href.split("/").pop();
+                            const li = document.createElement("li");
+                            li.textContent = `ID: ${studentId}, Imię: ${student.name}, Nazwisko: ${student.surname}, Średnia: ${student.average}`;
+                            studentList.appendChild(li);
+                        });
+                    } else {
+                        console.error("Expected an array but received:", students);
+                    }
+                } catch (error) {
+                    console.error("Error fetching students:", error);
+                }
+            });
 
-        <label for="updateName">Nowe imię:</label>
-        <input type="text" id="updateName" name="updateName" required><br><br>
 
-        <label for="updateSurname">Nowe nazwisko:</label>
-        <input type="text" id="updateSurname" name="updateSurname" required><br><br>
 
-        <label for="updateAverage">Nowa średnia:</label>
-        <input type="number" id="updateAverage" name="updateAverage" required><br><br>
+            // Dodawanie studenta
+            const addStudentForm = document.getElementById("addStudentForm");
 
-        <button type="submit">Zaktualizuj studenta</button>
-    </form>
+            addStudentForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(addStudentForm);
+                const student = {
+                    name: formData.get("name"),
+                    surname: formData.get("surname"),
+                    average: parseFloat(formData.get("average"))
+                };
 
-    <br><br>
+                try {
+                    const response = await fetch("/students/add", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(student)
+                    });
 
-    <!-- Usuwanie studenta -->
-    <h2>Usuń studenta</h2>
-    <form id="deleteStudentForm">
-        <label for="deleteStudentId">ID studenta do usunięcia:</label>
-        <input type="number" id="deleteStudentId" name="deleteStudentId" required><br><br>
-        <button type="submit">Usuń studenta</button>
-    </form>
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
 
-    <script src="app.js"></script>
+                    const newStudent = await response.json();
+                    alert(`Dodano studenta: Imię: ${newStudent.name}`);
+                    addStudentForm.reset();
+                } catch (error) {
+                    console.error("Error adding student:", error);
+                }
+            });
+
+            // Edytowanie studenta
+            const updateStudentForm = document.getElementById("updateStudentForm");
+
+            updateStudentForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(updateStudentForm);
+                const studentId = formData.get("studentId");
+                const updatedStudent = {
+                    name: formData.get("updateName"),
+                    surname: formData.get("updateSurname"),
+                    average: parseFloat(formData.get("updateAverage"))
+                };
+
+                try {
+                    const response = await fetch(`/students/${studentId}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(updatedStudent)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.text();
+                    alert(result);
+                    updateStudentForm.reset();
+                } catch (error) {
+                    console.error("Error updating student:", error);
+                }
+            });
+
+            // Usuwanie studenta
+            const deleteStudentForm = document.getElementById("deleteStudentForm");
+
+            deleteStudentForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(deleteStudentForm);
+                const studentId = formData.get("deleteStudentId");
+
+                try {
+                    const response = await fetch(`/students/${studentId}`, {
+                        method: "DELETE"
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.text();
+                    alert(result);
+                    deleteStudentForm.reset();
+                } catch (error) {
+                    console.error("Error deleting student:", error);
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>

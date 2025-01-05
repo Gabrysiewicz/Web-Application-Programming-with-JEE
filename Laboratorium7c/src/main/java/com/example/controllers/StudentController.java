@@ -12,20 +12,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@RequestMapping("/students")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
-
+    
     @GetMapping("/students")
     public List<Student> getAllStudents() {
         return studentService.getStudentList();
     }
     @PostMapping("/add")
     public Student addStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);  // Zapisuje studenta do bazy
+        return studentService.addStudent(student); 
     }
     // Endpoint do usuwania studenta
     @DeleteMapping("/{id}")
