@@ -14,13 +14,15 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
-    private final StudentConverter studentConverter;
+//    private final StudentConverter studentConverter;
 
     //@Override
     public List<StudentDto> getAllStudents() {
-        return (List<StudentDto>) studentRepository.findAll().stream()
-                .map(studentConverter::convert)
-                .collect(Collectors.toList());
+        return studentRepository.findAllNoAttachment();
+    }
+    //@Override
+    public List<StudentDto> getAllStudentsNoAttachment(){
+        return studentRepository.findAllNoAttachment();
     }
 }
 
