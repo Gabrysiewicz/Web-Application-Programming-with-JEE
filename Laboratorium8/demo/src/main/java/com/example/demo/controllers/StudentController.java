@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.domain.Student;
+import com.example.demo.dtos.StudentDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class StudentController {
     private final StudentServiceImpl studentService;
     
     @GetMapping
-    public List<Student> getAllStudents(){
+    public List<StudentDto> getAllStudents(){
         return studentService.getAllStudents();
     }
 }
