@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.memstagram.dto.FollowedDto;
 
 import java.util.List;
 
@@ -22,13 +23,22 @@ public class FollowController {
     public List<Follow> getFollowers(@PathVariable Long userId) {
         return followService.getFollowers(userId);
     }
-
     // Get all users that a specific user is following
     @GetMapping("/following/{userId}")
     public List<Follow> getFollowing(@PathVariable Long userId) {
         return followService.getFollowing(userId);
     }
+    // Get all followers of a user by username
+    @GetMapping("/followers/username/{username}")
+    public List<FollowedDto> getFollowersByUsername(@PathVariable String username) {
+        return followService.getFollowersByUsername(username);
+    }
 
+    // Get all users that a specific user is following by username
+    @GetMapping("/following/username/{username}")
+    public List<FollowedDto> getFollowingByUsername(@PathVariable String username) {
+        return followService.getFollowingByUsername(username);
+    }
     // Create a new follow relationship
     @PostMapping("/follow")
     public ResponseEntity<Follow> createFollow(@RequestBody Follow follow) {

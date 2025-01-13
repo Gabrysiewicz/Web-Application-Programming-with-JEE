@@ -1,5 +1,6 @@
 package com.example.memstagram.service;
 
+import com.example.memstagram.dto.FollowedDto;
 import com.example.memstagram.model.Follow;
 import com.example.memstagram.model.User;
 import com.example.memstagram.repository.FollowRepository;
@@ -26,7 +27,31 @@ public class FollowService {
     public List<Follow> getFollowing(Long userId) {
         return followRepository.findByFollowerId(userId); // Use ID directly
     }
+    public List<FollowedDto> getFollowersByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
+        return followRepository.findByFollowedId(user.getId()).stream()
+                .map(follow -> mapToFollowedDto(follow.getFollower()))
+                .toList();
+    }
+
+    public List<FollowedDto> getFollowingByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return followRepository.findByFollowerId(user.getId()).stream()
+                .map(follow -> mapToFollowedDto(follow.getFollowed()))
+                .toList();
+    }
+    private FollowedDto mapToFollowedDto(User user) {
+        return new FollowedDto(
+                user.getId(),
+                user.getUsername(),
+                user.getProfileImageUrl(),
+                user.getBio()
+        );
+    }
     // Create a new follow relationship
     public Follow createFollow(Follow follow) {
         // Validate that follower and followed users exist in the database

@@ -24,4 +24,5 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
 
     // Optional: Check if a Follow relationship exists
     boolean existsByFollowerIdAndFollowedId(Long followerId, Long followedId);
+
 }
