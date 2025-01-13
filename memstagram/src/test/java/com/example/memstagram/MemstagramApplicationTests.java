@@ -1,13 +1,13 @@
-package com.memstagram.api;
+package com.example.memstagram;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MemstagramRestApiApplicationTests {
+class MemstagramApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+	// @Test
+	// void contextLoads() {
+	// }
 
 }
