@@ -10,5 +10,6 @@ import lombok.*;
 public class MemeDto {
     private String imageUrl;
     private String description;
-    private Long userId; // Add this field for userId
+    private Long userId;
+    private Long id;
 }

@@ -21,11 +21,11 @@ public class FollowService {
 
     // Get all followers of a user
     public List<Follow> getFollowers(Long userId) {
-        return followRepository.findByFollowedId(userId); // Use ID directly
+        return followRepository.findByFollowedId(userId);
     }
 
     public List<Follow> getFollowing(Long userId) {
-        return followRepository.findByFollowerId(userId); // Use ID directly
+        return followRepository.findByFollowerId(userId);
     }
     public List<FollowedDto> getFollowersByUsername(String username) {
         User user = userRepository.findByUsername(username)
@@ -48,11 +48,9 @@ public class FollowService {
         return new FollowedDto(
                 user.getId(),
                 user.getUsername(),
-                user.getProfileImageUrl(),
-                user.getBio()
+                user.getProfileImageUrl()
         );
     }
-    // Create a new follow relationship
     public Follow createFollow(Follow follow) {
         // Validate that follower and followed users exist in the database
         User follower = userRepository.findById(follow.getFollower().getId())
@@ -60,7 +58,6 @@ public class FollowService {
         User followed = userRepository.findById(follow.getFollowed().getId())
                 .orElseThrow(() -> new RuntimeException("Followed user not found"));
 
-        // Set the valid User objects
         follow.setFollower(follower);
         follow.setFollowed(followed);
 

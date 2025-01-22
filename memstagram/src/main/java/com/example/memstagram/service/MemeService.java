@@ -81,4 +81,11 @@ public class MemeService {
         }
         return false; // Return false if the meme was not found
     }
+    public List<Meme> getMemesByUserUsernameInRange(String username, Long from, Long to) {
+        return memeRepository.findByUserUsernameAndIdBetween(username, from, to);
+    }
+
+    public long countMemesByUserUsername(String username) {
+        return memeRepository.countByUserUsername(username);
+    }
 }

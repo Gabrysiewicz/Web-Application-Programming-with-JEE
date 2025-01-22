@@ -9,5 +9,4 @@ public class FollowedDto {
     private Long id;
     private String username;
     private String profileImageUrl;
-    private String bio;
 }

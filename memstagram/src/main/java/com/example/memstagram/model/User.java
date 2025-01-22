@@ -28,7 +28,7 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Size(max = 48)
+    @Size(max = 48, min = 8, message = "Password must be at least 8 characters long")
     @Column(nullable = false, unique = true, length = 48)
     private String username;
 
@@ -46,12 +46,11 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String profileImageUrl;
 
     @Size(max = 128)
-    @Column(length = 128)
+    @Column(length = 128, nullable = true)
     private String bio;
 
     @CreatedDate

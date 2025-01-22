@@ -10,9 +10,10 @@ import java.util.Optional;
 @Repository
 public interface MemeRepository extends JpaRepository<Meme, Long> {
 
-    // Find memes by the user ID (corrected to use 'user' instead of 'userId')
     List<Meme> findByUserId(Long id);
-
-    // Find memes by the username of the user that posted it (corrected to use 'user' instead of 'userUsername')
     List<Meme> findByUserUsername(String username);
+    List<Meme> findByUserUsernameAndIdBetween(String username, Long from, Long to); // Method for ID range
+
+    long countByUserUsername(String username); // Method to count memes by username
+
 }
