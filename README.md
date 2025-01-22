@@ -1,3 +1,10 @@
+<table align='center'>
+  <tr> <td colspan='3'> <img width="884px" > </td> </tr>
+  <tr> <td colspan="3" align='center'> <img src='https://github.com/Gabrysiewicz/Programowanie-aplikacji-w-chmurze-obliczeniowe/blob/main/logo_politechniki_lubelskiej.jpg' width="400px" height="400px"></td> </tr>
+  <tr> <td> Kamil Gabrysiewicz </td> <td> Index: 95400 </td> <td> Grupa: 2.1 </td> </tr>  
+  <tr> <td> Magisterskie Semestr 2 </td> <td colspan='2' align='center'> Programowanie aplikacji internetowych w JEE </td> </tr>  
+</table>
+
 # Memstagram: Instagram for Memes
 An Instagram-like app where users can post memes, follow other users, and view memes of other users. No likes or comments, just follows. This project implements a backend API using Spring Boot 3.4.1 and Java 23.
 
@@ -155,12 +162,12 @@ The project uses a MySQL database running in Docker. Here is the database schema
 
 
 ## API Endpoints
-Backend server releases an API at localhost:8080/api
+Backend server releases an API at localhost:8080/api, all endpoint except (JWT FREE) require valid JWT to access them.
 
 User Endpoints:
 - GET /api/test: Endpoint for API test
-- POST /api/auth/register: Register a new user.
-- POST /api/auth/login: Log in and get a JWT token.
+- (JWT FREE) POST /api/auth/register: Register a new user.
+- (JWT FREE) POST /api/auth/login: Log in and get a JWT token.
 - GET /api/users: Returns all users.
 - GET /api/user/id/{id}: Returns only given user.
 - GET /api/user/username/{username}: Returns only given user.
@@ -185,3 +192,29 @@ Follow Endpoints:
 - GET /api/followers/username/{username}: Returns followers of given user.
 - GET /api/following/username/{username}: Returns users which are followed by given user.
 - DELETE /api/unfollow: Allows user1 to unfollow user2
+
+# How to run:
+### Database, inside docker directory run these (--build might be needed):
+```
+docker-compose up -d
+```
+
+### Spring Backend, its better to use terminal to avoid IDE errors that can happen very often. I used only these to run the backend, these commands are for Windows Powershell. Should run the app at localhost:8080:
+```
+.\mvnw clean
+.\mvnw package install
+.\mvnw spring-boot:run
+```
+
+### Frontend, inside frontend directory. Make sure that dependencies are installed:
+```
+npm install
+```
+
+Should run app at localhost:3000:
+```
+npm run dev
+```
+
+
+
