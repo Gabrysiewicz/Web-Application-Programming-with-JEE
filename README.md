@@ -29,6 +29,7 @@ Technologies Used
   - Bootstrap: 5.3.3
 
 Project Structure
+
 Here is simplified view of the project structure. 
 ```
 .
