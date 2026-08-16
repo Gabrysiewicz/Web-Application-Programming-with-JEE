@@ -1,6 +1,6 @@
 <table align='center'>
   <tr> <td colspan='3'> <img width="884px" > </td> </tr>
-  <tr> <td colspan="3" align='center'> <img src='https://github.com/Gabrysiewicz/Programowanie-aplikacji-w-chmurze-obliczeniowe/blob/main/logo_politechniki_lubelskiej.jpg' width="400px" height="400px"></td> </tr>
+  <tr> <td colspan="3" align='center'> <img src='https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/logo_politechniki_lubelskiej.jpg' width="400px" height="400px"></td> </tr>
   <tr> <td> Kamil Gabrysiewicz </td> <td> Index: 95400 </td> <td> Group: 2.1 </td> </tr>  
   <tr> <td> Master's session 2 </td> <td colspan='2' align='center'> Web Application Programming with JEE </td> </tr>  
 </table>
