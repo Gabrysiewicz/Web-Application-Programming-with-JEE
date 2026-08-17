@@ -220,23 +220,32 @@ npm run dev
 
 # Quick Preview
 
-Register / Login
-<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_register_login_view.jpg" width="600px"/>
+## 🔐 Register & Login
 
-User Profile
-<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_user_profile_view.jpg" width="600px"/>
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_register_login_view.jpg" width="700px"/>
 
-Edit Profile
-<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_edit_profile_view.jpg" width="600px"/>
+## 👤 User Profile
 
-Upload MEME (app was made very fast so upload method was an limitation)
-<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_upload_meme_view.jpg" width="600px"/>
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_user_profile_view.jpg" width="700px"/>
 
-Manage my Memes
-<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_manage_view.jpg" width="600px"/>
+## ✏️ Edit Profile
 
-Checking out other user's page
-<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_another_user_view.jpg" width="600px"/>
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_edit_profile_view.jpg" width="700px"/>
 
-Feed
-<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_feed_view.jpg" width="600px"/>
+## 📤 Upload Meme
+
+> The upload implementation is intentionally simple due to the limited development time.
+
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_upload_meme_view.jpg" width="700px"/>
+
+## 🗂️ Manage My Memes
+
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_manage_view.jpg" width="700px"/>
+
+## 👥 Other User's Profile
+
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_another_user_view.jpg" width="700px"/>
+
+## 📰 Feed
+
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_feed_view.jpg" width="700px"/>
