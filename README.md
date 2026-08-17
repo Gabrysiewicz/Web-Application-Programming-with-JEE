@@ -218,4 +218,25 @@ npm run dev
 ```
 
 
+# Quick Preview
 
+Register / Login
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_register_login_view.jpg" width="600px"/>
+
+User Profile
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_user_profile_view.jpg" width="600px"/>
+
+Edit Profile
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_edit_profile_view.jpg" width="600px"/>
+
+Upload MEME (app was made very fast so upload method was an limitation)
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_upload_meme_view.jpg" width="600px"/>
+
+Manage my Memes
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_manage_view.jpg" width="600px"/>
+
+Checking out other user's page
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_another_user_view.jpg" width="600px"/>
+
+Feed
+<img src="https://github.com/Gabrysiewicz/Web-Application-Programming-with-JEE/blob/main/public/app_feed_view.jpg" width="600px"/>
