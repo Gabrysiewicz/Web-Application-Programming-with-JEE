@@ -7,6 +7,7 @@
 
 # Memstagram: Instagram for Memes
 An Instagram-like app where users can post memes, follow other users, and view memes of other users. No likes or comments, just follows. This project implements a backend API using Spring Boot 3.4.1 and Java 23.
+> QuickNote: The project was heavily about backend development, the lecturer didnt graded the frontend due to lack of time, frontend wasnt required. So the app has way more backend than frontend features.
 
 Features
 - User registration and login.
